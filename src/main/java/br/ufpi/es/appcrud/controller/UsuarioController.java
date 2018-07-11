@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -234,8 +235,8 @@ public class UsuarioController {
 	 * @param session do usuário logado na aplicação
 	 * @return view TelaDetalhesUsuario.jsp | Home.jsp
 	 */
-	@RequestMapping("/detalharUsuario")
-	public ModelAndView processarDetalhesUsuario(int id, HttpSession session){
+	@RequestMapping("/detalharUsuario/{id}")
+	public ModelAndView processarDetalhesUsuario(@PathVariable("id") Integer id, HttpSession session){
 		if (session.getAttribute("objetoUsuario") != null){
 			ModelAndView mav = new ModelAndView("usuarios/TelaDetalhesUsuario");
 			Usuario usuario = usuarioDAO.buscarPorId(id);
@@ -253,8 +254,8 @@ public class UsuarioController {
 	 * @param redirectAttribute mensagem do tipo flash para evitar repetição de post
 	 * @return view listaUsuários | Home.jsp
 	 */
-	@RequestMapping("/removerUsuario")
-	public ModelAndView processarRemoverUsuario(int id, HttpSession session, RedirectAttributes redirectAttribute){
+	@RequestMapping("/removerUsuario/{id}")
+	public ModelAndView processarRemoverUsuario(@PathVariable("id") Integer id, HttpSession session, RedirectAttributes redirectAttribute){
 		if (session.getAttribute("objetoUsuario") != null){
 			Usuario usuario = usuarioDAO.buscarPorId(id);
 			usuarioDAO.remover(usuario);

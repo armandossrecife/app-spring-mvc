@@ -1,13 +1,20 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- Import da taglib -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<c:url value="/resources/css" var="cssPath" />
+<c:url value="/resources/js" var="jsPath" />
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
-    </head>
-    <body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Home</title>
+<!-- Bootstrap -->
+<link href="${cssPath }/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="${cssPath }/starter-template.css" rel="stylesheet">
+<script src="${jsPath }/bootstrap-filestyle.min.js"></script>
+</head>
+<body>
         <h1>Bem Vindo a aplicação Exemplo Básico Spring MVC</h1>
         <p>Nessa aplicação vamos trabalhar os princípios de uma aplicação de controle de acesso com o framework Spring MVC</p>
         <p>As seguintes features estão disponíveis:</p>

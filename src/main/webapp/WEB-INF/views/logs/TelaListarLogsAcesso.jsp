@@ -8,10 +8,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Lista de logs dos usuários</title>
+
+<c:url value="/resources/css" var="cssPath" />
+<c:url value="/resources/js" var="jsPath" />
+
+<!-- Bootstrap -->
+<link href="${cssPath }/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="${cssPath }/starter-template.css" rel="stylesheet">
+<script src="${jsPath }/bootstrap-filestyle.min.js"></script>
+
 </head>
 <body>
 	<p>${mensagem}</p>
-	<table>
+	<table class="table table-bordered table-striped table-hover">
 		<tr>
 			<td>Id</td>
 			<td>Descrição</td>

@@ -7,11 +7,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Resultado da busca de usuário</title>
+
+<c:url value="/resources/css" var="cssPath" />
+<c:url value="/resources/js" var="jsPath" />
+
+<!-- Bootstrap -->
+<link href="${cssPath }/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="${cssPath }/starter-template.css" rel="stylesheet">
+<script src="${jsPath }/bootstrap-filestyle.min.js"></script>
+
 </head>
 <body>
 	<p>${mensagem}</p>
 	<c:if test="${not empty usuario.id}">
-		<table border="1">
+		<table class="table table-bordered table-striped table-hover">
 			<tr>
 				<th>Id</th>
 				<th>Nome</th>
