@@ -41,11 +41,8 @@ public class AcessoController {
 	//recurso 1
 	@RequestMapping(value="/")
 	public ModelAndView home(HttpSession session){
-		if (session.getAttribute("objetoUsuario") != null){
-			return new ModelAndView("TelaPrincipal");
-		}else{
-			return new ModelAndView("Home");
-		}
+		return new ModelAndView("Home");
+		
 	}
 	
 	//recurso2
@@ -132,11 +129,7 @@ public class AcessoController {
 	public ModelAndView processarListaLogs(HttpSession session, Model model) {
 		List<LogAcesso> lista = logsDAO.getAcessos();
 
-		if (session.getAttribute("objetoUsuario") != null) {
-			model.addAttribute("logs", lista);
-			return(new ModelAndView("logs/TelaListarLogsAcesso"));
-		} else {
-			return(new ModelAndView("Home"));
-		}
+		model.addAttribute("logs", lista);
+		return (new ModelAndView("logs/TelaListarLogsAcesso"));
 	}
 }

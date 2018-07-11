@@ -24,13 +24,13 @@
 	<p>${mensagem}</p>
 
 	<p>
-		<a href="formularioInserir">Inserir Usuario</a>
+		<a href="formularioInserirUsuario">Inserir Usuario</a>
 	</p>
 	<p>
 		<a href="listarUsuarios">Listar Usuarios </a>
 	</p>
 	<p>
-		<a href="formularioBusca">Buscar Usuario </a>
+		<a href="formularioBuscarUsuario">Buscar Usuario </a>
 	</p>
 	<p>
 		<a href="listarLogsAcesso">Listar logs de acessos</a>

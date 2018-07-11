@@ -14,10 +14,12 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  */
 public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletInitializer{
 
+	/**
+	 * Carrega as configurações logo ao iniciar a aplicação
+	 */
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Class[] {SecurityConfiguration.class};
 	}
 
 	/**
