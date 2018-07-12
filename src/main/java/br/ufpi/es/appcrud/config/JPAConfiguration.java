@@ -12,6 +12,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * Faz a configuração do JPA/ORM para acesso ao banco de dados
+ * @author armandosoaressousa
+ *
+ */
 @EnableTransactionManagement
 public class JPAConfiguration {
 

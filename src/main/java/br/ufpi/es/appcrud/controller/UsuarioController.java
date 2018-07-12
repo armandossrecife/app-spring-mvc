@@ -26,6 +26,8 @@ import br.ufpi.es.appcrud.infra.FileSaver;
 import br.ufpi.es.appcrud.modelo.Usuario;
 import br.ufpi.es.appcrud.validation.UsuarioValidation;
 
+import br.ufpi.es.appcrud.utils.GeradorSenha;
+
 @Controller
 public class UsuarioController {
 	private static final long serialVersionUID = 1L;
@@ -137,7 +139,8 @@ public class UsuarioController {
 			String path = fileSaver.write("arquivos-imagem", imagem);
 			usuario.setImagemPath(path);
 		}
-
+		String senhaOriginal = usuario.getSenha();
+		usuario.setSenha(new GeradorSenha().criptografa(senhaOriginal));
 		usuarioDAO.alterar(usuario);
 		redirectAttribute.addFlashAttribute("mensagem", "Usuário " + usuario.getId() + " alterado com sucesso!");
 		return new ModelAndView("redirect:/listarUsuarios");
@@ -194,6 +197,8 @@ public class UsuarioController {
 			String path = fileSaver.write("arquivos-imagem", imagem);
 			usuario.setImagemPath(path);
 		}
+		String senhaOriginal = usuario.getSenha();
+		usuario.setSenha(new GeradorSenha().criptografa(senhaOriginal));
 		usuarioDAO.inserir(usuario);
 		redirectAttribute.addFlashAttribute("mensagem", "Usuario inserido com sucesso!");
 		return new ModelAndView("redirect:/listarUsuarios");

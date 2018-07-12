@@ -4,6 +4,7 @@ import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -19,7 +20,7 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 	 */
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {SecurityConfiguration.class};
+		return new Class[] {SecurityConfiguration.class, AppWebConfiguration.class, JPAConfiguration.class};
 	}
 
 	/**
@@ -27,7 +28,7 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 	 */
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {AppWebConfiguration.class, JPAConfiguration.class, WebConfig.class};
+		return new Class[] {};
 	}
 
 	/**
@@ -38,6 +39,9 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		return new String[] {"/"};
 	}
 	
+	/**
+	 * Faz uso do enconding UTF-8 para todos os arquivos da aplicação
+	 */
 	@Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
@@ -46,8 +50,13 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
         return new Filter[] {encodingFilter};
 	}
 	
+	/**
+	 * Lança uma exceção RuntimeException para ser tratada pelo controlador AdviceController
+	 * Também faz o registro de configuração de tratamento de arquivos Multipart
+	 */
 	@Override
 	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+		//TODO fazer o tratamento quando um recurso não existir 
 	    boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true"); 
 	    if(!done) throw new RuntimeException();
 	    

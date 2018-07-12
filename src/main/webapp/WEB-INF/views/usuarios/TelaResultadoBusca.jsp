@@ -36,7 +36,7 @@
 	</c:if>
 	<div>
 		<p>
-			<a href="/appcrudmvc">Voltar</a>
+			<a href="/appcrudmvc/formularioBuscarUsuario">Voltar</a>
 		</p>
 	</div>
 </body>

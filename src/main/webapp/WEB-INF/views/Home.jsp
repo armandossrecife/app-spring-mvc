@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- Import da taglib -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <c:url value="/resources/css" var="cssPath" />
 <c:url value="/resources/js" var="jsPath" />
@@ -30,6 +31,6 @@
         <li>Controle de sessão do usuário via session</li> 
         <li>Inserção de arquivo via Multipart armazenado no filesystem do Servidor</li> 
         </ol>
-        <p><a href="formularioLogin">Logar</a></p>
+        <p><a href="login">Login</a></p>
     </body>
 </html>

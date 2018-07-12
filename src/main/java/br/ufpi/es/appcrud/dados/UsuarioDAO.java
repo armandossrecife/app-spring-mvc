@@ -7,32 +7,26 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufpi.es.appcrud.modelo.Usuario;
 
 @Repository
 @Transactional
-public class UsuarioDAO {
-	IRepositorioUsuarios repositorio;
+/**
+ * @author armandosoaressousa
+ *
+ */
+public class UsuarioDAO implements UserDetailsService {
 	
 	@PersistenceContext
 	private EntityManager manager;
-	
-	/**
-	 * Construtor
-	 * @param tipo repositorio
-	 */
-	public UsuarioDAO(IRepositorioUsuarios tipo){
-		this.repositorio = tipo;
-	}
-	
-	/**
-	 * Construtor default
-	 */
-	public UsuarioDAO(){		
-	}
 		
 	/**
 	 * Insere um novo usuário no repositório ORM
@@ -199,6 +193,25 @@ public class UsuarioDAO {
 	 */
 	public Usuario buscarPorId(int id) {
 		return manager.find(Usuario.class, id);
+	}
+	
+	/**
+	 * Procura um usário por login, neste caso o login no spring security é o
+	 * e-mail do usuário
+	 * 
+	 * @param email do usuário
+	 * @return lista de usuários to tipo UserDetails
+	 */
+	@Override
+	public UserDetails loadUserByUsername(String email) {
+		List<Usuario> usuarios = manager.createQuery("select u from Usuario u where u.email = :email", Usuario.class)
+				.setParameter("email", email).getResultList();
+
+		if (usuarios.isEmpty()) {
+			throw new UsernameNotFoundException("O usuário " + email + " não foi encontrado");
+		}
+
+		return usuarios.get(0);
 	}
 	
 }

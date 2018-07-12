@@ -30,7 +30,7 @@
 			</p>
 
 			<p>
-				Conteúdo<input maxlength="50" name="conteudobusca" size="50" type="text" required/>
+				Conteúdo<input maxlength="50" name="conteudobusca" size="50" type="text"/>
 			</p>
 			<p>
 				<input name="botaobuscar" type="submit" value="Buscar" />
@@ -38,7 +38,7 @@
 		</form>
 	</div>
 	<div>
-	<p><a href="/appcrudmvc">Voltar</a></p>
+	<p><a href="/appcrudmvc/principal">Voltar</a></p>
 	</div>
 </body>
 </html>

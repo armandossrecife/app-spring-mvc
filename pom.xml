@@ -12,30 +12,33 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<java.version>1.8</java.version>
 		<spring.version>4.3.10.RELEASE</spring.version>
-		<cglib.version>2.2.2</cglib.version>
     	<maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>		
 	</properties>
 
 	<dependencies>
+	
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-servlet-api</artifactId>
 			<version>8.5.8</version>
 		</dependency>
+	
 		<!-- Spring core & mvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -43,6 +46,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -50,13 +54,42 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
-		<!-- CGLib for @Configuration -->
+
+		<!-- Dependências para permitir @Transactional com Spring Security -->
+		<!-- https://mvnrepository.com/artifact/asm/asm -->
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
 		<dependency>
 			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>${cglib.version}</version>
-			<scope>runtime</scope>
+			<artifactId>cglib</artifactId>
+			<version>3.1</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.7.4</version>
+		</dependency>
+
 		<!-- Servlet Spec -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
@@ -108,50 +141,42 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-		<version>4.2.0.Final</version>
+			<version>4.2.0.Final</version>
 		</dependency>
-	<dependency>
-		<groupId>com.fasterxml.jackson.core</groupId>
-		<artifactId>jackson-core</artifactId>
-		<version>2.5.1</version>
-	</dependency>
-	<dependency>
-		<groupId>com.fasterxml.jackson.core</groupId>
-		<artifactId>jackson-databind</artifactId>
-		<version>2.5.1</version>
-	</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.1</version>
+		</dependency>
 
-	<!-- Dependências do spring security -->
-	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-config</artifactId>
-		<version>4.0.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-taglibs</artifactId>
-		<version>4.0.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-web</artifactId>
-		<version>4.0.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-core</artifactId>
-		<version>4.0.0.RELEASE</version>
-	</dependency>
+		<!-- Dependências do spring security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.2.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.2.7.RELEASE</version>
+		</dependency>
 
 	</dependencies>
-	
-	<repositories>
-		<repository>
-			<id>springsource-milestones</id>
-			<name>SpringSource Milestones Proxy</name>
-			<url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<finalName>appcrudmvc</finalName>

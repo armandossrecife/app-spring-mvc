@@ -35,7 +35,7 @@
 		</form>
 	</div>
 	<div>
-	<p><a href="/appcrudmvc">Voltar</a></p>
+	<p><a href="/appcrudmvc/principal">Voltar</a></p>
 	</div>
 </body>
 </html>

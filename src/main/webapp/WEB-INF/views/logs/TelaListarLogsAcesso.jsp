@@ -41,7 +41,7 @@
 
 	<div>
 		<p>
-			<a href="/appcrudmvc">Voltar</a>
+			<a href="/appcrudmvc/principal">Voltar</a>
 		</p>
 	</div>
 </body>
