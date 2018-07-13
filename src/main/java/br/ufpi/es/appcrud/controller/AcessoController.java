@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.ufpi.es.appcrud.dados.LogAcessoDAO;
 import br.ufpi.es.appcrud.modelo.LogAcesso;
+import br.ufpi.es.appcrud.modelo.Usuario;
 import br.ufpi.es.appcrud.utils.ManipulaData;
 
 @Controller
@@ -93,9 +94,12 @@ public class AcessoController {
 	public ModelAndView dashBoard(HttpSession session){
 		//TODO corrigir o registro de login na aplicação
 		Authentication autenticacao = SecurityContextHolder.getContext().getAuthentication();
-		String loginUsuarioCorrente = autenticacao.getName(); 		
-		session.setAttribute("emailUsuario", loginUsuarioCorrente);
-	
+		String loginUsuarioCorrente = autenticacao.getName(); 
+		Usuario usuario = (Usuario) autenticacao.getPrincipal();
+		if (autenticacao.isAuthenticated()){
+			session.setAttribute("emailUsuario", loginUsuarioCorrente);
+			session.setAttribute("usuario", usuario);
+		}
 		return new ModelAndView("TelaPrincipal");
 	}
 	

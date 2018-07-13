@@ -248,4 +248,10 @@ public class UsuarioController {
 		return new ModelAndView("redirect:/listarUsuarios");
 	}
 	
+	@RequestMapping("/meuperfil/{id}")
+	public ModelAndView processarPerfilUsuario(@PathVariable("id") Integer id, HttpSession session) {
+		ModelAndView mav = new ModelAndView("usuarios/TelaPerfilUsuario");
+		return mav;
+	}
+	
 }
