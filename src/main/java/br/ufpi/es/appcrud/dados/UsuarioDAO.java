@@ -1,5 +1,6 @@
 package br.ufpi.es.appcrud.dados;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufpi.es.appcrud.modelo.Role;
 import br.ufpi.es.appcrud.modelo.Usuario;
 
 @Repository
@@ -33,6 +35,13 @@ public class UsuarioDAO implements UserDetailsService {
 	 * @param u dados do Usuario
 	 */
 	public void inserir(Usuario u) {
+		ArrayList<Role> attachedRoles = new ArrayList<>();
+        for(Role role: u.getRoles()) {
+            Role attached = manager.find(Role.class, role.getId());
+            attachedRoles.add(attached);
+        }
+        u.setRoles(attachedRoles);
+		
 		manager.persist(u);
 	}
 

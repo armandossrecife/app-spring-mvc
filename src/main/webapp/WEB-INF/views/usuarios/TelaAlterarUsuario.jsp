@@ -28,7 +28,11 @@
 			E-mail: <input name="email" type="text" value="${usuario.email}" required><form:errors path="usuario.email" /><br>
 			Senha: <input name="senha" type="password" required><form:errors path="usuario.senha" /><br>
 			Confirma senha: <input name="confirmasenha" type="password" required><br> 
-			Imagem: ${usuario.imagemPath}<input name="imagem" type="file"/>
+			Permissão: <select name="papel">
+				<option value="usuario" selected>Usuário Comum</option>
+				<option value="admin">Administrador</option>
+			</select> Imagem: ${usuario.imagemPath}<input
+				name="imagem" type="file" />
 			<p>
 				<input name="botaoalterar" type="submit" value="Alterar" />
 			</p>

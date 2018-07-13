@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +28,9 @@ public class Usuario implements UserDetails{
 	String email;
 	String senha;
 	String imagemPath;
-	@OneToMany(fetch=FetchType.EAGER)
+	 @ManyToMany(fetch=FetchType.EAGER, cascade = { 
+		        CascadeType.PERSIST, 
+		        CascadeType.MERGE})
 	private List<Role> roles = new ArrayList<Role>();
 	
 	public int getId() {

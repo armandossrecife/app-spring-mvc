@@ -1,6 +1,8 @@
 package br.ufpi.es.appcrud.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,10 +25,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufpi.es.appcrud.dados.UsuarioDAO;
 import br.ufpi.es.appcrud.infra.FileSaver;
+import br.ufpi.es.appcrud.modelo.Role;
 import br.ufpi.es.appcrud.modelo.Usuario;
 import br.ufpi.es.appcrud.validation.UsuarioValidation;
 
 import br.ufpi.es.appcrud.utils.GeradorSenha;
+import br.ufpi.es.appcrud.utils.ManipulaPermissoes;
 
 @Controller
 public class UsuarioController {
@@ -125,8 +129,10 @@ public class UsuarioController {
 	 * @throws IOException trata a exceção IOException caso aconteça
 	 */
 	@RequestMapping(value="/alterarUsuario", method=RequestMethod.POST)
-	public ModelAndView processarAlterarUsuario(MultipartFile imagem, @Valid Usuario usuario, BindingResult result,
+	public ModelAndView processarAlterarUsuario(String papel, MultipartFile imagem, @Valid Usuario usuario, BindingResult result,
 			HttpSession session, RedirectAttributes redirectAttribute) throws ServletException, IOException {
+		String senhaOriginal;
+		
 		if (result.hasErrors()) {
 			System.out.println((result.getFieldErrorCount("nome") > 0) ? "nome em branco!" : "campo nome ok!");
 			System.out.println((result.getFieldErrorCount("login") > 0) ? "login em branco!" : "campo login ok!");
@@ -139,8 +145,11 @@ public class UsuarioController {
 			String path = fileSaver.write("arquivos-imagem", imagem);
 			usuario.setImagemPath(path);
 		}
-		String senhaOriginal = usuario.getSenha();
+
+		senhaOriginal = usuario.getSenha();
 		usuario.setSenha(new GeradorSenha().criptografa(senhaOriginal));
+		usuario.setRoles(new ManipulaPermissoes().checaPapelUsuario(papel));
+
 		usuarioDAO.alterar(usuario);
 		redirectAttribute.addFlashAttribute("mensagem", "Usuário " + usuario.getId() + " alterado com sucesso!");
 		return new ModelAndView("redirect:/listarUsuarios");
@@ -183,9 +192,10 @@ public class UsuarioController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/inserirUsuario")
-	public ModelAndView processarInserirUsuario(MultipartFile imagem, @Valid Usuario usuario, BindingResult result,
+	public ModelAndView processarInserirUsuario(String papel, MultipartFile imagem, @Valid Usuario usuario, BindingResult result,
 			HttpSession session, RedirectAttributes redirectAttribute) throws ServletException, IOException {
-
+		String senhaOriginal; 
+			
 		if (result.hasErrors()) {
 			System.out.println((result.getFieldErrorCount("nome") > 0) ? "nome em branco!" : "campo nome ok!");
 			System.out.println((result.getFieldErrorCount("login") > 0) ? "login em branco!" : "campo login ok!");
@@ -197,8 +207,11 @@ public class UsuarioController {
 			String path = fileSaver.write("arquivos-imagem", imagem);
 			usuario.setImagemPath(path);
 		}
-		String senhaOriginal = usuario.getSenha();
+
+		senhaOriginal = usuario.getSenha();
 		usuario.setSenha(new GeradorSenha().criptografa(senhaOriginal));
+		usuario.setRoles(new ManipulaPermissoes().checaPapelUsuario(papel));
+		 
 		usuarioDAO.inserir(usuario);
 		redirectAttribute.addFlashAttribute("mensagem", "Usuario inserido com sucesso!");
 		return new ModelAndView("redirect:/listarUsuarios");
